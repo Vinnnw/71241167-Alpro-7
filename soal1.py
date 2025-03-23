@@ -1,31 +1,35 @@
-def prima(angka):
-    if angka <= 1:
+def cek_prima(bilangan):
+    if bilangan <= 1:
         return False
-    for i in range(2, angka):
-        if angka % i == 0:
+    for pembagi in range(2, bilangan):
+        if bilangan % pembagi == 0:
             return False
     return True
-def primaTerdekat(n):
-    lebihKecil = n - 1
-    while lebihKecil >= 2:
-        if prima(lebihKecil):
-            primaTerdekatKecil = lebihKecil
+
+def cari_prima_terdekat(target):
+    prima_kecil = target - 1
+    while prima_kecil >= 2:
+        if cek_prima(prima_kecil):
+            prima_terdekat_kecil = prima_kecil
             break
-        lebihKecil -= 1
+        prima_kecil -= 1
     else:
-        primaTerdekatKecil = None
-    lebihBesar = n + 1
+        prima_terdekat_kecil = None
+    
+    prima_besar = target + 1
     while True:
-        if prima(lebihBesar):
-            primaTerdekatBesar = lebihBesar
+        if cek_prima(prima_besar):
+            prima_terdekat_besar = prima_besar
             break
-        lebihBesar += 1
-    if primaTerdekatKecil is None:
-        return primaTerdekatBesar
-    elif n - primaTerdekatKecil >= n - primaTerdekatBesar:
-        return primaTerdekatKecil
+        prima_besar += 1
+    
+    if prima_terdekat_kecil is None:
+        return prima_terdekat_besar
+    elif target - prima_terdekat_kecil >= prima_terdekat_besar - target:
+        return prima_terdekat_kecil
     else:
-        return primaTerdekatBesar
-n = int(input("Masukkan suatu bilangan: "))
-prima = primaTerdekat(n)
-print(f"Bilangan prima terdekat dari {n} adalah {prima}")
+        return prima_terdekat_besar
+
+bilangan_input = int(input("Masukkan suatu bilangan: "))
+prima_terdekat = cari_prima_terdekat(bilangan_input)
+print(f"Bilangan prima terdekat dari {bilangan_input} adalah {prima_terdekat}")
